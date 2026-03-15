@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "A room styling project containing original and styled images.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "UID of the owner"
+        },
+        "originalImageUrl": {
+          "type": "string",
+          "description": "Base64 or URL of the original room photo"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["userId", "originalImageUrl", "createdAt"]
+    }
+  },
+  "firestore": {
+    "projects/{projectId}": {
+      "schema": "Project",
+      "description": "Collection of room styling projects"
+    },
+    "projects/{projectId}/versions/{versionId}": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "url": { "type": "string" },
+          "style": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" }
+        },
+        "required": ["url", "style", "createdAt"]
+      },
+      "description": "Subcollection for styled versions of a project"
+    }
+  }
+}
